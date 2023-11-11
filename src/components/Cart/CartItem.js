@@ -1,14 +1,19 @@
 import classes from './CartItem.module.css';
-
+import {useSelector} from 'react-redux'
 const CartItem = (props) => {
+  const cartItems = useSelector(state => state.cartItems)
   const { title, quantity, total, price } = props.item;
-
-  return (
-    <li className={classes.item}>
+console.log(cartItems)
+  
+   
+    return (<>{
+    cartItems && 
+     cartItems.map(item => {
+      return <li id = {Math.random.toString()} className={classes.item}>
       <header>
-        <h3>{title}</h3>
+        <h3>{item.title}</h3>
         <div className={classes.price}>
-          ${total.toFixed(2)}{' '}
+          ${item.price}{' '}
           <span className={classes.itemprice}>(${price.toFixed(2)}/item)</span>
         </div>
       </header>
@@ -21,8 +26,10 @@ const CartItem = (props) => {
           <button>+</button>
         </div>
       </div>
-    </li>
-  );
-};
-
+    </li> 
+     }) }
+  </> 
+  )
+  
+    }
 export default CartItem;
