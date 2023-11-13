@@ -1,17 +1,20 @@
 import Card from '../UI/Card';
 import classes from './ProductItem.module.css';
 import {useDispatch} from 'react-redux'
+import { itemAction } from '../store';
 const ProductItem = (props) => {
  const dispatch = useDispatch()
-  const { title, price, description } = props;
+  const {id , title,quantity, price, description } = props;
   const addItem = () =>{
     const obj = {
       title : title,
       price : price,
-      description : description
+      description : description,
+      id : id,
+      quantity : quantity
     } 
     console.log(obj)
-     dispatch({type : 'addItem' , payload : obj})
+     dispatch(itemAction.addItems(obj));
   } 
   return (
     <li className={classes.item}>
